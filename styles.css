@@ -22,8 +22,7 @@ body {
     height: 700px;
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
-    border-color: rgb(255, 255, 255);
+    border-color: white;
     border-width: 3px;
     border-style: solid;
     border-radius: 40px;
@@ -31,16 +30,23 @@ body {
     padding-top: 170px;
     gap: 20px;
     align-items: center;
+    justify-content: center;
 }
 
 .displayResult {
+    overflow: auto;
+    font-weight: 300;
+    height: 104px;
     color: white;
-    font-size: 60px;
+    font-size: 70px;
     display: flex;
+    flex: inherit;
     justify-content: flex-end;
     width: 300px;
+    margin-right: 15px;
     padding: 2px;
 }
+
 
 .calculator button {
     padding: 10px 10px;
@@ -50,7 +56,7 @@ body {
     height: 60px;
     font-size: 30px;
     font-weight: 450;
-    background-color: rgba(49,49,49);
+    background-color: rgb(49,49,49);
     color: white;
     border-style: none;
     display: flex;
@@ -59,7 +65,7 @@ body {
 }
 
 .rowTwo button {
-    background-color: rgb(143, 143, 143);
+    background-color: rgba(165,165,165);
     color: black;
     font-size: 25px;
     font-weight: 500;
@@ -67,6 +73,10 @@ body {
 
 .rowSix {
     margin-bottom: 10px;
+}
+
+#Clear {
+    font-weight: 350;
 }
 
 #Equals {
@@ -95,8 +105,8 @@ body {
 .buttons {
     display: flex;
     flex-direction: column;
-    flex: auto;
     border-style: solid;
+    border-style: none;
     padding: 10px;
     border-radius: 10px;
 }

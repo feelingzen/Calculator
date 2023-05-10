@@ -5,9 +5,18 @@ let operatorUsed = false;
 let secondNumber = '';
 let secondNumberUsed = false;
 let currentResult;
+let firstDecimalUsed = false;
+let secondDecimalUsed = false;
+let currentTheme = 'darkmode';
 
-const displayResult = document.querySelector('.displayResult')
-const buttonZero = document.querySelector('#zero')
+const github = document.querySelector('#Github')
+const body = document.querySelector('body')
+const calculator = document.querySelector('.calculator')
+const themeButton = document.querySelector('.Theme')
+const themeImage = document.querySelector('.theme-image')
+const buttonDecimal = document.querySelector('.decimal');
+const displayResult = document.querySelector('.displayResult');
+const buttonZero = document.querySelector('#zero');
 const buttonOne = document.querySelector('.one');
 const buttonTwo = document.querySelector('.two');
 const buttonThree = document.querySelector('.three');
@@ -17,12 +26,81 @@ const buttonSix = document.querySelector('.six');
 const buttonSeven = document.querySelector('.seven');
 const buttonEight = document.querySelector('.eight');
 const buttonNine = document.querySelector('.nine');
-const buttonAdd = document.querySelector('#Add')
+const buttonAdd = document.querySelector('#Add');
 const buttonSubtract = document.querySelector('#Subtract');
 const buttonMultiply = document.querySelector('#Multiply');
 const buttonDivide = document.querySelector('#Divide');
-const buttonClear = document.querySelector('.Clear');
-const buttonEqual = document.querySelector('#Equals')
+const buttonClear = document.querySelector('#Clear');
+const buttonEqual = document.querySelector('#Equals');
+
+themeButton.addEventListener('click', () => {
+    if (currentTheme == 'darkmode') {
+        buttonAdd.style.cssText = 'background-color: rgb(241,163,60); color: black;'
+        buttonSubtract.style.cssText = 'background-color: rgb(241,163,60); color: black;'
+        buttonDivide.style.cssText = 'background-color: rgb(241,163,60); color: black;'
+        buttonMultiply.style.cssText = 'background-color: rgb(241,163,60); color: black;'
+        github.style.cssText = 'background-color: rgb(241,163,60); color: black;'
+        themeButton.style.cssText = 'background-color: rgb(128,128,128); color: white;'
+        buttonEqual.style.cssText = 'background-color: rgb(128,128,128); color: white;'
+        buttonClear.style.cssText = 'background-color: rgb(128,128,128); color: white;'
+        themeImage.style.cssText = 'content: url(images/lightmode.png); width: 40px;'
+        body.style.cssText = 'background-color: white;'
+        displayResult.style.cssText = 'color: black;'
+        calculator.style.cssText = 'border-color: black'
+        buttonDecimal.style.cssText = 'background-color: rgb(199,199,199); color: black;'
+        buttonZero.style.cssText = 'background-color: rgb(199,199,199); color: black;'
+        buttonOne.style.cssText = 'background-color: rgb(199,199,199); color: black;'
+        buttonTwo.style.cssText = 'background-color: rgb(199,199,199); color: black;'
+        buttonThree.style.cssText = 'background-color: rgb(199,199,199); color: black;'
+        buttonFour.style.cssText = 'background-color: rgb(199,199,199); color: black;'
+        buttonFive.style.cssText = 'background-color: rgb(199,199,199); color: black;'
+        buttonSix.style.cssText = 'background-color: rgb(199,199,199); color: black;'
+        buttonSeven.style.cssText = 'background-color: rgb(199,199,199); color: black;'
+        buttonEight.style.cssText = 'background-color: rgb(199,199,199); color: black;'
+        buttonNine.style.cssText = 'background-color: rgb(199,199,199); color: black;'
+        currentTheme = 'lightmode'
+    } else if (currentTheme == 'lightmode') {
+        buttonAdd.style.cssText = 'background-color: rgb(241,163,60); color: white;'
+        buttonSubtract.style.cssText = 'background-color: rgb(241,163,60); color: white;'
+        buttonDivide.style.cssText = 'background-color: rgb(241,163,60); color: white;'
+        buttonMultiply.style.cssText = 'background-color: rgb(241,163,60); color: white;'
+        github.style.cssText = 'background-color: rgb(241,163,60); color: white;'
+        themeButton.style.cssText = 'background-color: rgb(165,165,165); color: black;'
+        buttonEqual.style.cssText = 'background-color: rgb(165,165,165); color: black;'
+        buttonClear.style.cssText = 'background-color: rgb(165,165,165); color: black;'
+        themeImage.style.cssText = 'content: url(images/darkmode.png); width: 30px;'
+        body.style.cssText = 'background-color: black;'
+        displayResult.style.cssText = 'color: white;'
+        calculator.style.cssText = 'border-color: white'
+        buttonDecimal.style.cssText = 'background-color: rgb(49,49,49); color: white;'
+        buttonZero.style.cssText = 'background-color: rgb(49,49,49); color: white;'
+        buttonOne.style.cssText = 'background-color: rgb(49,49,49); color: white;'
+        buttonTwo.style.cssText = 'background-color: rgb(49,49,49); color: white;'
+        buttonThree.style.cssText = 'background-color: rgb(49,49,49); color: white;'
+        buttonFour.style.cssText = 'background-color: rgb(49,49,49); color: white'
+        buttonFive.style.cssText = 'background-color: rgb(49,49,49); color: white;'
+        buttonSix.style.cssText = 'background-color: rgb(49,49,49); color: white;'
+        buttonSeven.style.cssText = 'background-color: rgb(49,49,49); color: white;'
+        buttonEight.style.cssText = 'background-color: rgb(49,49,49); color: white;'
+        buttonNine.style.cssText = 'background-color: rgb(49,49,49); color: white;'
+        currentTheme = 'darkmode'
+    }
+})
+
+buttonDecimal.addEventListener('click', () => {
+    if (firstDecimalUsed == false && firstNumberUsed == false) {
+        if (firstNumberUsed == false) {
+            firstNumber += '.';
+            currentResult = firstNumber;
+            displayResult.innerHTML = currentResult
+            firstDecimalUsed = true;
+        }
+    } else if (secondDecimalUsed == false && secondNumberUsed == false && firstNumberUsed == true) {
+        secondNumber += '.';
+        currentResult = firstNumber + ' ' + operator + ' ' + secondNumber;
+        displayResult.innerHTML = currentResult
+    }  
+})
 
 buttonZero.addEventListener('click', () => {
     if (firstNumberUsed == false) {
@@ -173,19 +251,19 @@ buttonDivide.addEventListener('click', () => {
 })
 
 function additionResult() {
-    return Math.round(parseInt(firstNumber) + parseInt(secondNumber))
+    return Number(firstNumber) + Number(secondNumber);
 }
 
 function subtractionResult() {
-
+    return Number(firstNumber) - Number(secondNumber);
 }
 
 function multiplicationResult() {
-
+    return Number(firstNumber) * Number(secondNumber);
 }
 
 function divisionResult() {
-
+    return Number(firstNumber) / Number(secondNumber)
 }
 
 buttonClear.addEventListener('click', clear)
@@ -193,24 +271,29 @@ buttonEqual.addEventListener('click', () => {
     if (operator == '+') {
         currentResult = additionResult();
     } else if (operator == '-') {
-        currentResult = Number(firstNumber) - Number(secondNumber);
+        currentResult = subtractionResult();
     } else if (operator == '*') {
-        currentResult = Number(firstNumber) * Number(secondNumber);
+        currentResult = multiplicationResult();
     } else if (operator == '/') {
-        currentResult = Number(firstNumber) / Number(secondNumber);
+        currentResult = divisionResult();
     }
     displayResult.innerHTML = currentResult
     console.log(currentResult)
     reset()
 })
 
+
 function reset() {
-    firstNumberUsed = false;
-    secondNumberUsed = false;
-    operatorUsed = false;
+    firstDecimalUsed = false;
+    secondDecimalUsed = false;
     firstNumber = currentResult;
+    firstNumberUsed = false;
+    operator = null;
+    operatorUsed = false;
     secondNumber = '';
-    operator = '';
+    secondNumberUsed = false;
+    currentResult;
+    displayResult.innerHTML = currentResult;
 }
 function operate() {
     if (operator == 'addition' && secondNumber != null) {
