@@ -34,7 +34,8 @@ body {
 }
 
 .displayResult {
-    overflow: auto;
+    overflow-x: auto;
+    overflow-y: auto;
     font-weight: 300;
     height: 104px;
     color: white;

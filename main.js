@@ -7,6 +7,7 @@ let secondNumberUsed = false;
 let currentResult;
 let firstDecimalUsed = false;
 let secondDecimalUsed = false;
+let stringReady = false;
 let currentTheme = 'darkmode';
 
 const github = document.querySelector('#Github')
@@ -220,6 +221,23 @@ buttonAdd.addEventListener('click', () => {
         operatorUsed = true;
         currentResult = firstNumber + ' ' + operator;
         displayResult.innerHTML = currentResult
+        stringReady = true;
+    } else if (firstNumberUsed == true && operatorUsed == true && stringReady == true) {
+        if (operator == '+') {
+            currentResult = additionResult()
+        } else if (operator == '-') {
+            currentResult = subtractionResult()
+        } else if (operator == '*') {
+            currentResult = multiplicationResult()
+        } else if (operator == '/') {
+            currentResult = divisionResult()
+        }
+        reset()
+        operator = '+'
+        currentResult = firstNumber + ' ' + operator;
+        operatorUsed = true;
+        firstNumberUsed = true;
+        displayResult.innerHTML = currentResult
     }
 })
 buttonSubtract.addEventListener('click', () => {
@@ -228,6 +246,22 @@ buttonSubtract.addEventListener('click', () => {
         operator = '-';
         operatorUsed = true;
         currentResult = firstNumber + ' ' + operator;
+        displayResult.innerHTML = currentResult
+    } else if (firstNumberUsed == true && operatorUsed == true && stringReady == true) {
+        if (operator == '+') {
+            currentResult = additionResult()
+        } else if (operator == '-') {
+            currentResult = subtractionResult()
+        } else if (operator == '*') {
+            currentResult = multiplicationResult()
+        } else if (operator == '/') {
+            currentResult = divisionResult()
+        }
+        reset()
+        operator = '-'
+        currentResult = firstNumber + ' ' + operator;
+        operatorUsed = true;
+        firstNumberUsed = true;
         displayResult.innerHTML = currentResult
     }
 })
@@ -238,6 +272,22 @@ buttonMultiply.addEventListener('click', () => {
         operatorUsed = true;
         currentResult = firstNumber + ' ' + operator;
         displayResult.innerHTML = currentResult
+    } else if (firstNumberUsed == true && operatorUsed == true && stringReady == true) {
+        if (operator == '+') {
+            currentResult = additionResult()
+        } else if (operator == '-') {
+            currentResult = subtractionResult()
+        } else if (operator == '*') {
+            currentResult = multiplicationResult()
+        } else if (operator == '/') {
+            currentResult = divisionResult()
+        }
+        reset()
+        operator = '*'
+        currentResult = firstNumber + ' ' + operator;
+        operatorUsed = true;
+        firstNumberUsed = true;
+        displayResult.innerHTML = currentResult
     }
 })
 buttonDivide.addEventListener('click', () => {
@@ -247,15 +297,31 @@ buttonDivide.addEventListener('click', () => {
         operatorUsed = true;
         currentResult = firstNumber + ' ' + operator;
         displayResult.innerHTML = currentResult
+    } else if (firstNumberUsed == true && operatorUsed == true && stringReady == true) {
+        if (operator == '+') {
+            currentResult = additionResult()
+        } else if (operator == '-') {
+            currentResult = subtractionResult()
+        } else if (operator == '*') {
+            currentResult = multiplicationResult()
+        } else if (operator == '/') {
+            currentResult = divisionResult()
+        }
+        reset()
+        operator = '/'
+        currentResult = firstNumber + ' ' + operator;
+        operatorUsed = true;
+        firstNumberUsed = true;
+        displayResult.innerHTML = currentResult
     }
 })
 
 function additionResult() {
-    return Number(firstNumber) + Number(secondNumber);
+    return Number(firstNumber) + Math.round(Number(secondNumber) * 1000) / 1000;
 }
 
 function subtractionResult() {
-    return Number(firstNumber) - Number(secondNumber);
+    return Number(firstNumber) - Math.round(Number(secondNumber) * 1000) / 1000;
 }
 
 function multiplicationResult() {
@@ -263,7 +329,7 @@ function multiplicationResult() {
 }
 
 function divisionResult() {
-    return Number(firstNumber) / Number(secondNumber)
+    return Number(firstNumber) / Number(secondNumber);
 }
 
 buttonClear.addEventListener('click', clear)
@@ -315,6 +381,7 @@ function clear() {
     operator = null;
     operatorUsed = false;
     currentResult = 0;
+    stringReady = false;
     displayResult.innerHTML = currentResult;
 }
 
